@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.drComboBox = new System.Windows.Forms.ComboBox();
             this.drButtonGo = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.totalBytesLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.bytesLabel = new System.Windows.Forms.Label();
-            this.retriesLabel = new System.Windows.Forms.Label();
             this.transceiver = new System.ComponentModel.BackgroundWorker();
             this.sfdROM = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
@@ -79,6 +79,7 @@
             this.drComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.drComboBox.FormattingEnabled = true;
             this.drComboBox.Items.AddRange(new object[] {
+            "Auto",
             "4 MiB",
             "8 MiB",
             "16 MiB",
@@ -135,10 +136,10 @@
             this.dsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dsComboBox.FormattingEnabled = true;
             this.dsComboBox.Items.AddRange(new object[] {
+            "Auto",
             "EEPROM 512 B",
             "EEPROM 8 KiB",
             "SRAM 32 KiB",
-            "SRAM 64 KiB",
             "FLASH 64 KiB",
             "FLASH 128 KiB"});
             this.dsComboBox.Location = new System.Drawing.Point(103, 46);
@@ -204,10 +205,10 @@
             this.usComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.usComboBox.FormattingEnabled = true;
             this.usComboBox.Items.AddRange(new object[] {
+            "Auto",
             "EEPROM 512 B",
             "EEPROM 8 KiB",
             "SRAM 32 KiB",
-            "SRAM 64 KiB",
             "FLASH 64 KiB",
             "FLASH 128 KiB"});
             this.usComboBox.Location = new System.Drawing.Point(103, 46);
@@ -252,9 +253,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(103, 19);
+            this.progressBar1.Location = new System.Drawing.Point(103, 11);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(406, 31);
+            this.progressBar1.Size = new System.Drawing.Size(406, 39);
             this.progressBar1.TabIndex = 3;
             // 
             // groupBox4
@@ -262,7 +263,6 @@
             this.groupBox4.Controls.Add(this.totalBytesLabel);
             this.groupBox4.Controls.Add(this.cancelButton);
             this.groupBox4.Controls.Add(this.bytesLabel);
-            this.groupBox4.Controls.Add(this.retriesLabel);
             this.groupBox4.Controls.Add(this.progressBar1);
             this.groupBox4.Location = new System.Drawing.Point(12, 95);
             this.groupBox4.Name = "groupBox4";
@@ -282,9 +282,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(515, 30);
+            this.cancelButton.Location = new System.Drawing.Point(515, 11);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(91, 21);
+            this.cancelButton.Size = new System.Drawing.Size(91, 39);
             this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -298,15 +298,6 @@
             this.bytesLabel.Size = new System.Drawing.Size(73, 13);
             this.bytesLabel.TabIndex = 5;
             this.bytesLabel.Text = "Bytes/s: none";
-            // 
-            // retriesLabel
-            // 
-            this.retriesLabel.AutoSize = true;
-            this.retriesLabel.Location = new System.Drawing.Point(521, 14);
-            this.retriesLabel.Name = "retriesLabel";
-            this.retriesLabel.Size = new System.Drawing.Size(52, 13);
-            this.retriesLabel.TabIndex = 4;
-            this.retriesLabel.Text = "Retries: 0";
             // 
             // transceiver
             // 
@@ -329,6 +320,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(652, 201);
             this.MinimumSize = new System.Drawing.Size(652, 201);
@@ -371,7 +363,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox drComboBox;
         private System.Windows.Forms.Label bytesLabel;
-        private System.Windows.Forms.Label retriesLabel;
         private System.ComponentModel.BackgroundWorker transceiver;
         private System.Windows.Forms.SaveFileDialog sfdROM;
         private System.Windows.Forms.Button cancelButton;

@@ -63,17 +63,23 @@ namespace AGB_Cartridge_Reader
             usComboBox.Enabled = true;
         }
 
+        private static string humanReadable(int x)
+        {
+            if (x >= 1024)
+                return (x >> 10).ToString() + "K";
+            else
+                return x.ToString();
+        }
+
         private void setProgress(int percentage, ProgressState ps)
         {
             if (ps != null)
             {
-                retriesLabel.Text = "Retries: " + ps.retries;
-                bytesLabel.Text = "Bytes/s: " + ps.bytesPerSecond;
-                totalBytesLabel.Text = "Bytes: " + ps.totalBytes;
+                bytesLabel.Text = "Bytes/s: " + humanReadable(ps.bytesPerSecond);
+                totalBytesLabel.Text = "Bytes: " + humanReadable(ps.totalBytes);
             }
             else
             {
-                retriesLabel.Text = "Retries: none";
                 bytesLabel.Text = "Bytes/s: none";
                 totalBytesLabel.Text = "Bytes: none";
             }
@@ -108,6 +114,9 @@ namespace AGB_Cartridge_Reader
             WorkerArgs.OperationType type;
             switch (drComboBox.Text)
             {
+                case "Auto":
+                    type = WorkerArgs.OperationType.DOWNLOAD_AUTO_ROM;
+                    break;
                 case "4 MiB":
                     type = WorkerArgs.OperationType.DOWNLOAD_4M_ROM;
                     break;
@@ -168,6 +177,9 @@ namespace AGB_Cartridge_Reader
             WorkerArgs.OperationType type;
             switch (dsComboBox.Text)
             {
+                case "Auto":
+                    type = WorkerArgs.OperationType.DOWNLOAD_AUTO_SAVE;
+                    break;
                 case "EEPROM 512 B":
                     type = WorkerArgs.OperationType.DOWNLOAD_512_EEPROM;
                     break;
@@ -176,9 +188,6 @@ namespace AGB_Cartridge_Reader
                     break;
                 case "SRAM 32 KiB":
                     type = WorkerArgs.OperationType.DOWNLOAD_SRAM_32K;
-                    break;
-                case "SRAM 64 KiB":
-                    type = WorkerArgs.OperationType.DOWNLOAD_SRAM_64K;
                     break;
                 case "FLASH 64 KiB":
                     type = WorkerArgs.OperationType.DOWNLOAD_FLASH_64K;
@@ -202,6 +211,9 @@ namespace AGB_Cartridge_Reader
             WorkerArgs.OperationType type;
             switch (usComboBox.Text)
             {
+                case "Auto":
+                    type = WorkerArgs.OperationType.UPLOAD_AUTO_SAVE;
+                    break;
                 case "EEPROM 512 B":
                     type = WorkerArgs.OperationType.UPLOAD_512_EEPROM;
                     break;
@@ -210,9 +222,6 @@ namespace AGB_Cartridge_Reader
                     break;
                 case "SRAM 32 KiB":
                     type = WorkerArgs.OperationType.UPLOAD_SRAM_32K;
-                    break;
-                case "SRAM 64 KiB":
-                    type = WorkerArgs.OperationType.UPLOAD_SRAM_64K;
                     break;
                 case "FLASH 64 KiB":
                     type = WorkerArgs.OperationType.UPLOAD_FLASH_64K;
@@ -240,20 +249,21 @@ namespace AGB_Cartridge_Reader
 
         public enum OperationType
         {
+            DOWNLOAD_AUTO_ROM,
             DOWNLOAD_4M_ROM,
             DOWNLOAD_8M_ROM,
             DOWNLOAD_16M_ROM,
             DOWNLOAD_32M_ROM,
+            DOWNLOAD_AUTO_SAVE,
             DOWNLOAD_512_EEPROM,
             DOWNLOAD_8K_EEPROM,
             DOWNLOAD_SRAM_32K,
-            DOWNLOAD_SRAM_64K,
             DOWNLOAD_FLASH_64K,
             DOWNLOAD_FLASH_128K,
+            UPLOAD_AUTO_SAVE,
             UPLOAD_512_EEPROM,
             UPLOAD_8K_EEPROM,
             UPLOAD_SRAM_32K,
-            UPLOAD_SRAM_64K,
             UPLOAD_FLASH_64K,
             UPLOAD_FLASH_128K,
         }
@@ -264,14 +274,12 @@ namespace AGB_Cartridge_Reader
 
     class ProgressState
     {
-        public ProgressState(int retries, int bytesPerSecond, int totalBytes)
+        public ProgressState(int bytesPerSecond, int totalBytes)
         {
-            this.retries = retries;
             this.bytesPerSecond = bytesPerSecond;
             this.totalBytes = totalBytes;
         }
 
-        public readonly int retries;
         public readonly int bytesPerSecond;
         public readonly int totalBytes;
     }

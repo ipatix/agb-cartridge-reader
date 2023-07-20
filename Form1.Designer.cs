@@ -55,10 +55,15 @@
             this.bytesLabel = new System.Windows.Forms.Label();
             this.transceiver = new System.ComponentModel.BackgroundWorker();
             this.sfdROM = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.serialPortsComboBox = new System.Windows.Forms.ComboBox();
+            this.refreshSerialButton = new System.Windows.Forms.Button();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -255,7 +260,7 @@
             // 
             this.progressBar1.Location = new System.Drawing.Point(103, 11);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(406, 39);
+            this.progressBar1.Size = new System.Drawing.Size(504, 39);
             this.progressBar1.TabIndex = 3;
             // 
             // groupBox4
@@ -266,7 +271,7 @@
             this.groupBox4.Controls.Add(this.progressBar1);
             this.groupBox4.Location = new System.Drawing.Point(12, 95);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(612, 56);
+            this.groupBox4.Size = new System.Drawing.Size(710, 56);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Progress";
@@ -282,7 +287,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(515, 11);
+            this.cancelButton.Location = new System.Drawing.Point(613, 11);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(91, 39);
             this.cancelButton.TabIndex = 6;
@@ -311,19 +316,49 @@
             // 
             this.sfdROM.Filter = "GBA-ROMs|*.gba|All Files|*.*";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.serialPortsComboBox);
+            this.groupBox5.Controls.Add(this.refreshSerialButton);
+            this.groupBox5.Location = new System.Drawing.Point(630, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(92, 77);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Serial Port";
+            // 
+            // serialPortsComboBox
+            // 
+            this.serialPortsComboBox.FormattingEnabled = true;
+            this.serialPortsComboBox.Location = new System.Drawing.Point(6, 18);
+            this.serialPortsComboBox.Name = "serialPortsComboBox";
+            this.serialPortsComboBox.Size = new System.Drawing.Size(80, 21);
+            this.serialPortsComboBox.TabIndex = 1;
+            // 
+            // refreshSerialButton
+            // 
+            this.refreshSerialButton.Location = new System.Drawing.Point(6, 45);
+            this.refreshSerialButton.Name = "refreshSerialButton";
+            this.refreshSerialButton.Size = new System.Drawing.Size(80, 23);
+            this.refreshSerialButton.TabIndex = 0;
+            this.refreshSerialButton.Text = "Refresh Ports";
+            this.refreshSerialButton.UseVisualStyleBackColor = true;
+            this.refreshSerialButton.Click += new System.EventHandler(this.refreshSerialButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 162);
+            this.ClientSize = new System.Drawing.Size(734, 162);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(652, 201);
-            this.MinimumSize = new System.Drawing.Size(652, 201);
+            this.MaximumSize = new System.Drawing.Size(750, 201);
+            this.MinimumSize = new System.Drawing.Size(750, 201);
             this.Name = "MainForm";
             this.Text = "AGB Cartridge Reader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -336,6 +371,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -367,6 +403,10 @@
         private System.Windows.Forms.SaveFileDialog sfdROM;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label totalBytesLabel;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox serialPortsComboBox;
+        private System.Windows.Forms.Button refreshSerialButton;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
     }
 }
 

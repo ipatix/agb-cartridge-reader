@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace AGB_Cartridge_Reader
             drComboBox.SelectedIndex = 0;
 
             setProgress(0, null);
+
+            refreshSerialPorts();
         }
 
         private void lockGUI()
@@ -61,6 +64,35 @@ namespace AGB_Cartridge_Reader
             usButtonGo.Enabled = true;
             usTextBox.Enabled = true;
             usComboBox.Enabled = true;
+        }
+
+        private void refreshSerialPorts()
+        {
+            string[] ports = SerialPort.GetPortNames();
+            if (ports.Count() == 0)
+            {
+                serialPortsComboBox.Text = "";
+                serialPortsComboBox.SelectedIndex = -1;
+            }
+            else
+            {
+                string oldSelected = serialPortsComboBox.Text;
+                serialPortsComboBox.Items.Clear();
+                foreach (string port in ports)
+                    serialPortsComboBox.Items.Add(port);
+                int index = serialPortsComboBox.Items.IndexOf(oldSelected);
+                if (index == -1)
+                {
+                    if (serialPortsComboBox.Items.Count == 0)
+                        serialPortsComboBox.Text = "";
+                    else
+                        serialPortsComboBox.Text = ports[0];
+                }
+                else
+                {
+                    serialPortsComboBox.SelectedIndex = index;
+                }
+            }
         }
 
         private static string humanReadable(int x)
@@ -237,6 +269,11 @@ namespace AGB_Cartridge_Reader
                 return;
             lockGUI();
             transceiver.RunWorkerAsync(wa);
+        }
+
+        private void refreshSerialButton_Click(object sender, EventArgs e)
+        {
+            refreshSerialPorts();
         }
     }
     class WorkerArgs
